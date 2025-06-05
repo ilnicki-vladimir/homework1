@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Ghost Fix Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="logo">MyApp</div>
+        <button class="hamburger" id="menuBtn">☰ Menu</button>
+        <ul class="menu" id="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <main class="content">
+        <h1>Menu Ghosting Fix Demo</h1>
+        <p>Resize your browser to exactly 768px width to see the ghosting effect with the original CSS.</p>
+        <p>The fixed version uses max-width: 767.98px instead of 768px to avoid the boundary issue.</p>
+        <div class="width-indicator">
+            Current width: <span id="widthDisplay">-</span>px
+        </div>
+    </main>
+
+    <script>
+        // Toggle menu
+        const menuBtn = document.getElementById('menuBtn');
+        const menu = document.getElementById('menu');
+        
+        menuBtn.addEventListener('click', () => {
+            menu.classList.toggle('open');
+        });
+        
+        // Show current width
+        const widthDisplay = document.getElementById('widthDisplay');
+        
+        function updateWidth() {
+            widthDisplay.textContent = window.innerWidth;
+        }
+        
+        updateWidth();
+        window.addEventListener('resize', updateWidth);
+        
+        // Close menu when resizing from mobile to desktop and back
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 767.98) {
+                menu.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html> 
